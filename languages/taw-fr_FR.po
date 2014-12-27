@@ -1,0 +1,56 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Tuto API WP\n"
+"POT-Creation-Date: 2014-12-27 11:56+0100\n"
+"PO-Revision-Date: 2014-12-27 12:06+0100\n"
+"Last-Translator: Julien Maury <contact@tweetpress.fr>\n"
+"Language-Team: jmlapam <contact@tweetpress.fr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"Language: fr_FR\n"
+
+#: classes/widget.class.php
+msgid "The widget configuration is wrong !"
+msgstr "La configuration du widget est erronée !"
+
+#: classes/widget.class.php
+msgid "Allows to grab data from tuto.com"
+msgstr "Permet de récupérer ses stats sur tuto.com"
+
+#: classes/widget.class.php
+msgid "API Tuto.com"
+msgstr "API Tuto.com"
+
+#: classes/widget.class.php
+msgid "API Key:"
+msgstr "Clé API:"
+
+#: classes/widget.class.php
+msgid "API Login:"
+msgstr "Login API:"
+
+#: classes/widget.class.php
+msgid "API Secret:"
+msgstr "Mot de passe:"
+
+#: view/widget-output.php
+msgid "tutorials : "
+msgstr "tutos : "
+
+#: view/widget-output.php
+msgid "customers : "
+msgstr "clients : "
+
+#: view/widget-output.php
+msgid "sales : "
+msgstr "ventes :"
+
+#: view/widget-output.php
+msgid "average rating : "
+msgstr "note moyenne : "

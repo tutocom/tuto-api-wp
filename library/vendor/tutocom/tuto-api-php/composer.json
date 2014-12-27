@@ -1,0 +1,24 @@
+{
+    "name": "tutocom/tuto-api-php",
+    "description": "wrapper for Tuto.com API",
+    "type": "library",
+    "homepage": "https://api.tuto.com/docs/",
+    "version": "0.2.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Remi Heens",
+            "email": "remi@tuto.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "guzzlehttp/guzzle": "5.0.3",
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tuto\\": "src/"
+        }
+    }
+}
