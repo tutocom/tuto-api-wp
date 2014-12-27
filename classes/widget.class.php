@@ -108,7 +108,7 @@ class TAW_Widget extends WP_Widget {
      * @param string $apilogin
      * @param string $apisecret
      *
-     * @return $output
+     * @return $transient
      */
     protected function get_stats($apikey, $apilogin, $apisecret){
 
