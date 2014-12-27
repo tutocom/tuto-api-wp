@@ -9,6 +9,7 @@ Basé sur [Tuto PHP Wrapper](https://github.com/tutocom/tuto-api-php)
 
 ## Pré-requis
 
+* **PHP 5.4  !!!**
 * Etre contributeur sur tuto.com
 * Récupérer la clé API, la clé login et la clé secrète sur [votre interface de gestion](http://fr.tuto.com/compte/vendeur/informations/api/) puis paramétrer le widget.
 * Avoir cURL activé sur le serveur
