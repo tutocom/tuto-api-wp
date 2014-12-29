@@ -43,7 +43,7 @@ class TAW_Widget extends WP_Widget {
 
         if( ( empty( $this->opts['apikey'] ) || empty( $this->opts['apilogin'] ) || empty( $this->opts['apisecret'] ) )
 
-            || (  $this->opts['use_default'] == 1 && empty( $instance['custom_code'] ) )
+            || (  $this->opts['use_default'] != 1 && empty( $instance['custom_code'] ) )
 
         ) {
 
@@ -106,19 +106,17 @@ class TAW_Widget extends WP_Widget {
      */
     protected function get_stats($apikey, $apilogin, $apisecret, $use_default, $custom_code ){
 
-        $output = '@(-_-)@';
-
         // quick cache WP
-        $data = get_site_transient( md5($apikey . $apilogin . $apisecret) );
+        $output = get_site_transient( md5($apikey . $apilogin . $apisecret) );
 
-        if( false === $data ) {
+        if( false === $output ) {
 
             $url  = self::API_HOST . '/' . self::API_VERSION . '/' . self:: API_ENDPOINT;
             $args = array(
                 'headers' => array(
                     'X-API-KEY' => $apikey,
                     'Authorization' => 'Basic ' .  base64_encode($apilogin .':'.$apisecret ),// thanks remiheens for making this endpoint available with Basic :)
-                    ),
+                    )
             );
 
             try {
@@ -130,7 +128,7 @@ class TAW_Widget extends WP_Widget {
                 if( $response_code == 200 ){
 
                     $stats = json_decode( wp_remote_retrieve_body( $response ), true );
-
+                    $stat = reset($stats);
                     // call view
                     require(TAW_DIR . 'views/client/widget-output.php');
                 } else {
@@ -153,7 +151,7 @@ class TAW_Widget extends WP_Widget {
             set_site_transient( md5($apikey . $apilogin . $apisecret), $output, DAY_IN_SECONDS );// seems enough, ~ 1 refresh per day
         }
 
-        return $data;
+        return $output;
     }
 
     /**
