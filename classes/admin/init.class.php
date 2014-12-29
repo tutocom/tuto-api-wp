@@ -2,7 +2,7 @@
 defined('ABSPATH')
 or die('No direct load !');
 
-if( ! class_exists('SMM_Init') ) {
+if( ! class_exists('TAW_Init') ) {
     class TAW_Init{
         /**
          * Avoid undefined index by registering default options
