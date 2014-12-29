@@ -9,7 +9,7 @@ foreach ( $stats as $stat ) {
         $output .= '<span class="taw-sales">' . __('sales : ', TAW_TEXTDOMAIN) . $stat['sales'] . '</span>';
         $output .= '<span class="taw-rating">' . sprintf(__('average rating : ', TAW_TEXTDOMAIN) . '%d / 5', round($stat['rating'], 1)) . '</span>';
     } else {
-        $output = wp_kses_data($custom_code);
+        $output = wp_kses_post($custom_code);
         $output = str_replace('%CUSTOMERS_COUNT%', $stat['customers'], $output);
         $output = str_replace('%SALES_COUNT%', $stat['sales'], $output);
         $output = str_replace('%AVERAGE_RATING%', round($stat['rating'], 1), $output);
