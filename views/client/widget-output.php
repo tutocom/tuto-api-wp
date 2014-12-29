@@ -18,5 +18,5 @@ if($use_default == 1) {
     $output = str_replace('%CUSTOMERS_COUNT%', $stat['customers'], $output);
     $output = str_replace('%SALES_COUNT%', $stat['sales'], $output);
     $output = str_replace('%AVERAGE_RATING%', round($stat['rating'], 1), $output);
-    $output = str_replace('%TUTORIALS_COUNT%', round($stat['tutorials'], 1), $output);
+    $output = str_replace('%TUTORIALS_COUNT%', $stat['tutorials'], $output);
 }
