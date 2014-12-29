@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tuto API WP\n"
 "POT-Creation-Date: 2014-12-27 11:56+0100\n"
-"PO-Revision-Date: 2014-12-27 12:14+0100\n"
+"PO-Revision-Date: 2014-12-29 15:40+0100\n"
 "Last-Translator: Julien Maury <contact@tweetpress.fr>\n"
 "Language-Team: jmlapam <contact@tweetpress.fr>\n"
 "MIME-Version: 1.0\n"
@@ -54,3 +54,54 @@ msgstr "ventes : "
 #: view/widget-output.php
 msgid "average rating : "
 msgstr "note moyenne : "
+
+#: view/widget-output.php
+msgid "See all tutorials"
+msgstr "Voir tous les tutoriels"
+
+#: classes/widget.class.php
+msgid ""
+"The API returns this message (only users with right permissions can see this "
+"message) :"
+msgstr ""
+"L'API a retourné un message d'erreur (seuls les utilisateurs autorisés "
+"peuvent voir ce message sur le site) :"
+
+#: classes/widget.class.php
+msgid "Use default widget ?"
+msgstr "Utiliser le widget par défaut ?"
+
+#: classes/widget.class.php
+msgid "Yes"
+msgstr "Oui"
+
+#: classes/widget.class.php
+msgid "No"
+msgstr "Non"
+
+#: classes/widget.class.php
+msgid ""
+"You can choose which statistics you want to show. By default all statistics "
+"will be displayed by the widget Tuto.com but you can easily change it. Just "
+"select \"no\" for the option \"Use default widget\" and use the following "
+"special markers :"
+msgstr ""
+"Vous pouvez choisir quelles statistiques afficher. Par défaut toutes les "
+"statistiques sont affichées mais c'est personnalisable avec les marqueurs "
+"suivants. Sélectionnez simplement \"non\" pour l'option \"utiliser le widget "
+"par défaut\" et utiliser les marqueurs suivants dans les réglages du widget "
+"sur la page des widgets :"
+
+#: classes/widget.class.php
+msgid ""
+"You can use these special markers or just use the default widget. If "
+"something goes wrong with display, just select \"yes\" in \"Use default "
+"widget\" and flush the cash by updating widget settings. Don't do this too "
+"much, there are only 6 requests per hour allowed !"
+msgstr ""
+"Vous pouvez soit utiliser les marqueurs spécifiques soit le widget par "
+"défaut. Si quelque chose ne va pas avec l'affichage, il est recommandé de "
+"sélectionner  \"oui\" dans \"utiliser le widget par défaut\" et de vider le "
+"cache en mettant à jour les réglages du widget sur la page des widgets. "
+"Attention à ne pas trop abuser de cette technique, seules 6 requêtes par "
+"heures sont autorisées par l'API !"

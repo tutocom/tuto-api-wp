@@ -54,3 +54,32 @@ msgstr ""
 #: view/widget-output.php
 msgid "average rating : "
 msgstr ""
+
+#: view/widget-output.php
+msgid "See all tutorials"
+msgstr ""
+
+#: classes/widget.class.php
+msgid "The API returns this message (only users with right permissions can see this message) :"
+msgstr ""
+
+#: classes/widget.class.php
+msgid "Use default widget ?"
+msgstr ""
+
+#: classes/widget.class.php
+msgid "Yes"
+msgstr ""
+
+#: classes/widget.class.php
+msgid "No"
+msgstr ""
+
+#: classes/widget.class.php
+msgid "You can choose which statistics you want to show. By default all statistics will be displayed by the widget Tuto.com but you can easily change it. Just select \"no\" for the option \"Use default widget\" and use the following special markers :"
+msgstr ""
+
+#: classes/widget.class.php
+msgid "You can use these special markers or just use the default widget. If something goes wrong with display, just select \"yes\" in \"Use default widget\" and flush the cash by updating widget settings. Don't do this too much, there are only 6 requests per hour allowed !"
+msgstr ""
+
