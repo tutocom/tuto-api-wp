@@ -12,5 +12,5 @@ Pour le moment, l'API Tuto.com est uniquement disponible pour les auteurs.
 
 ## Attention
 
-Si vous choisissez l'option custom code (<=> non à l'option widget par défaut) vous êtes responsable du HTML ajouté dans la page. Il y a un wp_kses_data() pour le sanitize mais le HTML peut être cassé.
+Si vous choisissez l'option custom code (<=> non à l'option widget par défaut) vous êtes responsable du HTML ajouté dans la page. Il y a un wp_kses_data() pour le sanitize mais le HTML peut être cassé si vous oubliez de fermer une div par exemple.
 A utiliser avec précautions.
