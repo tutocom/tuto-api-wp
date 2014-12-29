@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) or die ('No direct load !');
 
-if( ! class_exists('') ) {
+if( ! class_exists('TAW_Admin') ) {
 
     class TAW_Admin{
 
