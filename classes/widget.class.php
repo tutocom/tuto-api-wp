@@ -73,9 +73,7 @@ class TAW_Widget extends WP_Widget {
         <?php if( $this->opts['use_default'] != 1 ) : ?>
         <p>
             <label for="<?php echo $this->get_field_id( 'custom_code' ); ?>"><?php _e( 'Code' ); ?></label>
-            <textarea rows="10" class="widefat" id="<?php echo $this->get_field_id( 'custom_code' ); ?>" name="<?php echo $this->get_field_name( 'custom_code' ); ?>">
-                <?php echo wp_kses_data( $custom_code ); ?>
-            </textarea>
+            <textarea rows="10" class="widefat" id="<?php echo $this->get_field_id( 'custom_code' ); ?>" name="<?php echo $this->get_field_name( 'custom_code' ); ?>"><?php echo wp_kses_data( $custom_code ); ?></textarea>
         </p><em><strong>%CUSTOMERS_COUNT%, %SALES_COUNT%,%TUTORIALS_COUNT%, %AVERAGE_RATING%</strong></em>
         <?php endif;
     }
