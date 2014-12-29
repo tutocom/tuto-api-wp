@@ -10,6 +10,7 @@ Pour le moment, l'API Tuto.com est uniquement disponible pour les auteurs.
 * Etre contributeur sur tuto.com
 * Récupérer la clé API, la clé login et la clé secrète sur [votre interface de gestion](http://fr.tuto.com/compte/vendeur/informations/api/) puis paramétrer le widget.
 
-Pour tester vos identifiants :
+## Attention
 
-    curl -H "X-API-KEY: APIKEY" --digest -u username:secret https://api.tuto.com/0.2/contributor/statistics/common
+Si vous choisissez l'option custom code (<=> non à l'option widget par défaut) vous êtes responsable du HTML ajouté dans la page. Il y a un wp_kses_data() pour le sanitize mais le HTML peut être cassé.
+A utiliser avec précautions.

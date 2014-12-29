@@ -12,7 +12,7 @@ foreach ( $stats as $stat ) {
         $output = wp_kses_data($custom_code);
         $output = str_replace('%CUSTOMERS_COUNT%', $stat['customers'], $output);
         $output = str_replace('%SALES_COUNT%', $stat['sales'], $output);
-        $output = str_replace('%AVERAGE_RATING%', round($stat['rating']), $output);
+        $output = str_replace('%AVERAGE_RATING%', round($stat['rating'], 1), $output);
     }
 
 }
