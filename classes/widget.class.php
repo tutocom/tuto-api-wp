@@ -24,7 +24,32 @@ class TAW_Widget extends WP_Widget {
             __( 'API Tuto.com', TAW_TEXTDOMAIN ), // Name
             array( 'description' => __( 'Allows to grab data from tuto.com', TAW_TEXTDOMAIN ), ) // Args
         );
+
+        // could be usefull too
+        add_action( 'wp_dashboard_setup', array($this, 'add_dashboard_widget') );
     }
+
+    /*
+     * Register new dashboard widget
+     */
+    public function add_dashboard_widget(){
+
+        wp_add_dashboard_widget(
+            'tuto_dashboard_widget',// Widget slug.
+            'Tuto.com',// Title.
+            array( $this, 'add_dashboard_widget_content' ) // Display function.
+        );
+
+    }
+
+    /*
+     * Callback for dashboard widget
+     */
+    public function add_dashboard_widget_content(){
+
+        echo $this->display_stats();
+    }
+
 
     /**
      * Front-end display of widget.
@@ -51,7 +76,7 @@ class TAW_Widget extends WP_Widget {
 
         }
 
-        echo $this->get_stats($this->opts['apikey'], $this->opts['apilogin'], $this->opts['apisecret'], $this->opts['use_default'], $instance['custom_code']);
+        echo $this->display_stats($this->opts['use_default'], $instance['custom_code']);
 
         echo $args['after_widget'];
     }
@@ -99,17 +124,33 @@ class TAW_Widget extends WP_Widget {
     }
 
     /**
-     * Use the library to get data
-     *
-     * @link http://api.tuto.com/docs/
-     * @return string $data
+     * Display Data
      */
-    protected function get_stats($apikey, $apilogin, $apisecret, $use_default, $custom_code ){
+    public function display_stats($use_default = false, $custom_code = false){
+
+        $data = $this->get_stats($this->opts['apikey'], $this->opts['apilogin'], $this->opts['apisecret']);
+
+        if ( is_array($data) ){
+            reset($stats);
+            $output = '';
+            require(TAW_DIR . 'views/client/widget-output.php');
+            return $output;
+        }
+
+        return $data;
+    }
+
+    /**
+     * Get data from tuto.com API and use some cache
+     * @link http://api.tuto.com/docs/
+     * @return mixed $data
+     */
+    protected function get_stats($apikey, $apilogin, $apisecret ){
 
         // quick cache WP
-        $output = get_site_transient( md5($apikey . $apilogin . $apisecret) );
+        $data = get_site_transient( md5($apikey . $apilogin . $apisecret) );
 
-        if( false === $output ) {
+        if( false === $data ) {
 
             $url  = self::API_HOST . '/' . self::API_VERSION . '/' . self:: API_ENDPOINT;
             $args = array(
@@ -126,32 +167,25 @@ class TAW_Widget extends WP_Widget {
                 $response_mess = wp_remote_retrieve_response_message( $response );
 
                 if( $response_code == 200 ){
-
-                    $stats = json_decode( wp_remote_retrieve_body( $response ), true );
-                    $stat = reset($stats);
-                    // call view
-                    require(TAW_DIR . 'views/client/widget-output.php');
+                    $data = json_decode( wp_remote_retrieve_body( $response ), true );
                 } else {
                     $this->delete_cache($apikey, $apilogin, $apisecret);
-                    $output  =  __('The API returns this message (only users with right permissions can see this message) :', TAW_TEXTDOMAIN ) ."\n";
-                    $output .= '<strong>' . $response_code . ' : ' . $response_mess . '</strong>';
-
-                    return current_user_can( 'manage_options' ) ? $output : '';
+                    $data  =  __('The API returns this message (only users with right permissions can see this message) :', TAW_TEXTDOMAIN ) ."\n";
+                    $data .= '<strong>' . $response_code . ' : ' . $response_mess . '</strong>';
+                    return current_user_can( 'manage_options' ) ? $data : '';
                 }
 
             } catch (Exception $e) {
                 $this->delete_cache($apikey, $apilogin, $apisecret);
-                $output  =  __('The API returns this message (only users with right permissions can see this message) :', TAW_TEXTDOMAIN ) ."\n";
-                $output .= '<strong>' . $e->getMessage() . '</strong>';
-
-                return current_user_can( 'manage_options' ) ? $output : '';
-
+                $data  =  __('The API returns this message (only users with right permissions can see this message) :', TAW_TEXTDOMAIN ) ."\n";
+                $data .= '<strong>' . $e->getMessage() . '</strong>';
+                return current_user_can( 'manage_options' ) ? $data : '';
             }
 
-            set_site_transient( md5($apikey . $apilogin . $apisecret), $output, DAY_IN_SECONDS );// seems enough, ~ 1 refresh per day
+            set_site_transient( md5($apikey . $apilogin . $apisecret), $data, DAY_IN_SECONDS );// seems enough, ~ 1 refresh per day
         }
 
-        return $output;
+        return $data;
     }
 
     /**

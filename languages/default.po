@@ -80,10 +80,6 @@ msgid "You can choose which statistics you want to show. By default all statisti
 msgstr ""
 
 #: classes/widget.class.php
-msgid "You can use these special markers or just use the default widget. If something goes wrong with display, just select \"yes\" in \"Use default widget\" and flush the cash by updating widget settings. Don't do this too much, there are only 6 requests per hour allowed !"
-msgstr ""
-
-#: classes/widget.class.php
 msgid "Get your keys"
 msgstr ""
 

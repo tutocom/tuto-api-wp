@@ -33,6 +33,5 @@ defined('ABSPATH') or die('No direct load !');
         </fieldset>
         <p><?php _e( 'You can choose which statistics you want to show. By default all statistics will be displayed by the widget Tuto.com but you can easily change it. Just select "no" for the option "Use default widget" and use the following special markers :', TAW_TEXTDOMAIN ); ?></p>
         <p><strong>%CUSTOMERS_COUNT%, %SALES_COUNT%,%TUTORIALS_COUNT%,%AVERAGE_RATING%</strong></p>
-        <p><?php _e( 'You can use these special markers or just use the default widget. If something goes wrong with display, just select "yes" in "Use default widget" and flush the cash by updating widget settings. Don\'t do this too much, there are only 6 requests per hour allowed !', TAW_TEXTDOMAIN); ?></p>
     </form>
 </div>

@@ -93,19 +93,5 @@ msgstr ""
 "sur la page des widgets :"
 
 #: classes/widget.class.php
-msgid ""
-"You can use these special markers or just use the default widget. If "
-"something goes wrong with display, just select \"yes\" in \"Use default "
-"widget\" and flush the cash by updating widget settings. Don't do this too "
-"much, there are only 6 requests per hour allowed !"
-msgstr ""
-"Vous pouvez soit utiliser les marqueurs spécifiques soit le widget par "
-"défaut. Si quelque chose ne va pas avec l'affichage, il est recommandé de "
-"sélectionner  \"oui\" dans \"utiliser le widget par défaut\" et de vider le "
-"cache en mettant à jour les réglages du widget sur la page des widgets. "
-"Attention à ne pas trop abuser de cette technique, seules 6 requêtes par "
-"heures sont autorisées par l'API !"
-
-#: classes/widget.class.php
 msgid "Get your keys"
 msgstr "Obtenez vos identifiants"
