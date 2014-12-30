@@ -131,8 +131,7 @@ class TAW_Widget extends WP_Widget {
         $data = $this->get_stats($this->opts['apikey'], $this->opts['apilogin'], $this->opts['apisecret']);
 
         if ( is_array($data) ){
-            reset($stats);
-            $output = '';
+            $stat = reset($data);
             require(TAW_DIR . 'views/client/widget-output.php');
             return $output;
         }
