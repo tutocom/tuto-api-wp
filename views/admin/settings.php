@@ -9,6 +9,7 @@ defined('ABSPATH') or die('No direct load !');
         <?php settings_fields( TAW_SLUG ); ?>
         <fieldset>
             <legend class="hide-text"><?php _e('Options'); ?></legend>
+            <p><a href="//fr.tuto.com/compte/vendeur/informations/api/"><?php _e( 'Get your keys', TAW_TEXTDOMAIN ); ?></a></p>
             <p>
                 <label for="taw-apikey"><strong><?php _e( 'API Key:', TAW_TEXTDOMAIN );  ?></strong></label><br/>
                 <input type="text" id="taw-apikey" name="taw_stats[apikey]" value="<?php echo esc_attr( $opts['apikey'] );?>" class="regular-text code" />
