@@ -47,7 +47,7 @@ class TAW_Widget extends WP_Widget {
      */
     public function add_dashboard_widget_content(){
 
-        echo $this->display_stats();
+        echo $this->display_stats(1);
     }
 
 
@@ -123,25 +123,6 @@ class TAW_Widget extends WP_Widget {
         return $instance;
     }
 
-    /**
-     * Display Data
-     */
-    public function display_stats($use_default = false, $custom_code = false){
-
-        $data = $this->get_stats($this->opts['apikey'], $this->opts['apilogin'], $this->opts['apisecret']);
-
-        if ( is_array($data) ){
-
-            $stat = reset($data);
-            $apilogin = $this->opts['apilogin'];
-
-            require(TAW_DIR . 'views/client/widget-output.php');
-
-            return $output;
-        }
-
-        return $data;
-    }
 
     /**
      * Get data from tuto.com API and use some cache
@@ -186,6 +167,26 @@ class TAW_Widget extends WP_Widget {
             }
 
             set_site_transient( md5($apikey . $apilogin . $apisecret), $data, DAY_IN_SECONDS );// seems enough, ~ 1 refresh per day
+        }
+
+        return $data;
+    }
+
+    /**
+     * Display Data
+     */
+    public function display_stats($use_default = false, $custom_code = false){
+
+        $data = $this->get_stats($this->opts['apikey'], $this->opts['apilogin'], $this->opts['apisecret']);
+
+        if ( is_array($data) ){
+
+            $stat = reset($data);
+            $apilogin = $this->opts['apilogin'];
+
+            require(TAW_DIR . 'views/client/widget-output.php');
+
+            return $output;
         }
 
         return $data;
