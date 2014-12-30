@@ -11,7 +11,6 @@ if( ! class_exists('TAW_Admin') ) {
             add_action('admin_menu', array($this, 'add_menu_page'));
         }
 
-
         public function add_menu_page(){
             $this->TAW_Admin_Page =
                 add_menu_page(
@@ -25,7 +24,6 @@ if( ! class_exists('TAW_Admin') ) {
 
             register_setting(TAW_SLUG, 'taw_stats');
         }
-
 
         // view
         public function admin_page(){

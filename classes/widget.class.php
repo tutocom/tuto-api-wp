@@ -27,6 +27,18 @@ class TAW_Widget extends WP_Widget {
 
         // could be usefull too
         add_action( 'wp_dashboard_setup', array($this, 'add_dashboard_widget') );
+
+        // style widget
+        add_action( 'admin_enqueue_scripts', array($this, 'add_basic_styles') );
+    }
+
+    // add basic styles
+    // is_active_widget( false, false, $this->id_base, true ) if we need for front
+    // $hook_suffix == 'toplevel_page_taw_admin'  if we need to add this on admin page instead
+    public function add_basic_styles($hook_suffix){
+        if( $hook_suffix == 'index.php'  ) {
+            wp_enqueue_style( 'taw-default', TAW_URL . 'assets/css/admin/widget.css', array(), TAW_VERSION );
+        }
     }
 
     /*
@@ -48,6 +60,7 @@ class TAW_Widget extends WP_Widget {
     public function add_dashboard_widget_content(){
 
         echo $this->display_stats(1);
+
     }
 
 
@@ -183,6 +196,8 @@ class TAW_Widget extends WP_Widget {
 
             $stat = reset($data);
             $apilogin = $this->opts['apilogin'];
+
+            $output = '';
 
             require(TAW_DIR . 'views/client/widget-output.php');
 

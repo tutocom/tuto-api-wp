@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tuto API WP\n"
 "POT-Creation-Date: 2014-12-27 11:56+0100\n"
-"PO-Revision-Date: 2014-12-30 14:01+0100\n"
+"PO-Revision-Date: 2014-12-30 19:42+0100\n"
 "Last-Translator: Julien Maury <contact@tweetpress.fr>\n"
 "Language-Team: jmlapam <contact@tweetpress.fr>\n"
 "MIME-Version: 1.0\n"
@@ -40,20 +40,20 @@ msgid "API Secret:"
 msgstr "Mot de passe:"
 
 #: view/widget-output.php
-msgid "tutorials : "
-msgstr "tutos : "
+msgid "tutorials"
+msgstr "tutos"
 
 #: view/widget-output.php
-msgid "customers : "
-msgstr "clients : "
+msgid "customers"
+msgstr "clients"
 
 #: view/widget-output.php
-msgid "sales : "
-msgstr "ventes : "
+msgid "sales"
+msgstr "ventes"
 
 #: view/widget-output.php
-msgid "average rating : "
-msgstr "note moyenne : "
+msgid "average rating out of 5"
+msgstr "note moyenne sur 5"
 
 #: view/widget-output.php
 msgid "See all tutorials"

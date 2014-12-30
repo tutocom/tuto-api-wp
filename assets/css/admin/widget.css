@@ -1,0 +1,28 @@
+.big-number-statistics{
+    font-size: 30px;
+    font-family: sans-serif;
+    color: #3f4348;
+    display:block;
+    margin: .3em auto;
+}
+.sentence-under-number-statistics {
+    color: #a7a7a7;
+    font-size: 16px;
+    text-align: left;
+    display: block;
+    position: relative;
+    bottom: 5px;
+}
+.taw-container{
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    columns: 2;
+}
+.taw{
+    padding:1em;
+}
+.taw-link{
+    display:block;
+    margin:15px;
+    text-align: right;
+}

@@ -40,19 +40,19 @@ msgid "API Secret:"
 msgstr ""
 
 #: view/widget-output.php
-msgid "tutorials : "
+msgid "tutorials"
 msgstr ""
 
 #: view/widget-output.php
-msgid "customers : "
+msgid "customers"
 msgstr ""
 
 #: view/widget-output.php
-msgid "sales : "
+msgid "sales"
 msgstr ""
 
 #: view/widget-output.php
-msgid "average rating : "
+msgid "average rating out of 5"
 msgstr ""
 
 #: view/widget-output.php
