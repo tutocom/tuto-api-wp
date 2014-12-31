@@ -14,3 +14,5 @@ Pour le moment, l'API Tuto.com est uniquement disponible pour les auteurs.
 
 Si vous choisissez l'option custom code (<=> non à l'option widget par défaut) vous êtes responsable du HTML ajouté dans la page. Il y a un sanitize mais le HTML peut être cassé si vous oubliez de fermer une div par exemple.
 A utiliser avec précautions.
+
+Pour flusher le cache il faut mettre à jour les réglages du widget

@@ -2,7 +2,7 @@
 defined( 'ABSPATH' ) or die ('No direct load !');
 
 /**
- * Adds TAW_Widget widget.
+ * Class TAW_Widget
  */
 class TAW_Widget extends WP_Widget {
 
@@ -10,11 +10,11 @@ class TAW_Widget extends WP_Widget {
     const API_VERSION = '0.2';
     const API_ENDPOINT = 'contributor/statistics/common';
 
+    /**
+     * @var
+     */
     protected $opts;
 
-    /**
-     * Register widget with WordPress.
-     */
     function __construct() {
 
         $this->opts = get_option( 'taw_stats' );
@@ -32,17 +32,17 @@ class TAW_Widget extends WP_Widget {
         add_action( 'admin_enqueue_scripts', array($this, 'add_basic_styles') );
     }
 
-    // add basic styles
-    // is_active_widget( false, false, $this->id_base, true ) if we need for front
-    // $hook_suffix == 'toplevel_page_taw_admin'  if we need to add this on admin page instead
+    /**
+     * @param $hook_suffix
+     */
     public function add_basic_styles($hook_suffix){
         if( $hook_suffix == 'index.php'  ) {
             wp_enqueue_style( 'taw-default', TAW_URL . 'assets/css/admin/widget.css', array(), TAW_VERSION );
         }
     }
 
-    /*
-     * Register new dashboard widget
+    /**
+     * Just display stats in a dashboard widget
      */
     public function add_dashboard_widget(){
 
@@ -54,15 +54,14 @@ class TAW_Widget extends WP_Widget {
 
     }
 
-    /*
-     * Callback for dashboard widget
+    /**
+     * Grab stats and echo in widget
      */
     public function add_dashboard_widget_content(){
 
         echo $this->display_stats(1);
 
     }
-
 
     /**
      * Front-end display of widget.
@@ -136,11 +135,11 @@ class TAW_Widget extends WP_Widget {
         return $instance;
     }
 
-
     /**
-     * Get data from tuto.com API and use some cache
-     * @link http://api.tuto.com/docs/
-     * @return mixed $data
+     * @param $apikey
+     * @param $apilogin
+     * @param $apisecret
+     * @return array|mixed|string
      */
     protected function get_stats($apikey, $apilogin, $apisecret ){
 
@@ -186,7 +185,9 @@ class TAW_Widget extends WP_Widget {
     }
 
     /**
-     * Display Data
+     * @param bool $use_default
+     * @param bool $custom_code
+     * @return array|mixed|string
      */
     public function display_stats($use_default = false, $custom_code = false){
 
@@ -208,7 +209,6 @@ class TAW_Widget extends WP_Widget {
     }
 
     /**
-     * Delete cache
      * @param $apikey
      * @param $apilogin
      * @param $apisecret

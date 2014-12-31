@@ -3,9 +3,13 @@ defined('ABSPATH')
 or die('No direct load !');
 
 if( ! class_exists('TAW_Init') ) {
+    /**
+     * Class TAW_Init
+     */
     class TAW_Init{
+
         /**
-         * Avoid undefined index by registering default options
+         * Initialized options on activation
          */
         public static function on_activation(){
             $opts = get_option( 'taw_stats' );

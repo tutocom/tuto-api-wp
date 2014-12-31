@@ -2,15 +2,23 @@
 defined( 'ABSPATH' ) or die ('No direct load !');
 
 if( ! class_exists('TAW_Admin') ) {
-
+    /**
+     * Class TAW_Admin
+     */
     class TAW_Admin{
 
+        /**
+         * @var
+         */
         private $TAW_Admin_Page;
 
         public function __construct(){
             add_action('admin_menu', array($this, 'add_menu_page'));
         }
 
+        /**
+         * Set menu page
+         */
         public function add_menu_page(){
             $this->TAW_Admin_Page =
                 add_menu_page(
@@ -25,18 +33,26 @@ if( ! class_exists('TAW_Admin') ) {
             register_setting(TAW_SLUG, 'taw_stats');
         }
 
-        // view
+        /**
+         * Grab view
+         */
         public function admin_page(){
             $opts = self::get_options();
             require(TAW_DIR . 'views/admin/settings.php');
         }
 
-        // Process options when submitted
+        /**
+         * @param $options
+         * @return array
+         */
         protected static function sanitize($options){
             return array_merge(self::get_options(), self::sanitize_options($options));
         }
 
-        // Sanitize options
+        /**
+         * @param $options
+         * @return array
+         */
         protected static function sanitize_options($options){
             $new = array();
             if (!is_array($options))
@@ -53,7 +69,9 @@ if( ! class_exists('TAW_Admin') ) {
             return $new;
         }
 
-        // Retrieve and sanitize options
+        /**
+         * @return array
+         */
         protected static function get_options(){
             $options = get_option('taw_stats');
             return array_merge(TAW_Init::get_default_options(), self::sanitize_options($options));

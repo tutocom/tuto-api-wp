@@ -2,7 +2,7 @@
 /*
  * Plugin name: Tuto.com WordPress Wrapper
  * Description: Un widget WordPress pour utiliser l'API auteur de tuto.com dans WordPress
- * Version: 0.0.5
+ * Version: 0.0.7
  * Author: Julien Maury
  * Author URI: http://www.tweetpress.fr
  */
@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 defined( 'ABSPATH' ) or die ('No direct load !');
 
-define( 'TAW_VERSION', '0.0.5' );
+define( 'TAW_VERSION', '0.0.7' );
 define( 'TAW_DIR', plugin_dir_path(__FILE__) );
 define( 'TAW_URL', plugin_dir_url(__FILE__) );
 define( 'TAW_LANG_DIR', dirname(plugin_basename(__FILE__)) . '/languages/' );
@@ -37,7 +37,11 @@ if( is_admin() ){
 
 require( TAW_DIR. 'classes/widget.class.php' );
 
-// early init
+
+
+/**
+ *  early init
+ */
 add_action( 'plugins_loaded', '_taw_init' );
 function _taw_init(){
     // i18n
@@ -49,11 +53,15 @@ function _taw_init(){
 
 }
 
-// register TAW_Widget widget
+/**
+ * register TAW_Widget widget
+ */
 add_action( 'widgets_init', '_taw_register_widget' );
 function _taw_register_widget() {
     register_widget( 'TAW_Widget' );
 }
 
-// on activation
+/**
+ * on activation
+ */
 register_activation_hook( __FILE__, array('TAW_Init', 'on_activation') );
