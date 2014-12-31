@@ -37,8 +37,6 @@ if( is_admin() ){
 
 require( TAW_DIR. 'classes/widget.class.php' );
 
-
-
 /**
  *  early init
  */

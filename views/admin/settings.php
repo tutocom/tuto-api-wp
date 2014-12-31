@@ -1,5 +1,6 @@
 <?php
 defined('ABSPATH') or die('No direct load !');
+
 ?>
 <div class="wrap taw-settings">
     <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
