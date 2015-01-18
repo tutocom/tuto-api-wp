@@ -107,7 +107,7 @@ class TAW_Widget extends WP_Widget {
             <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
         </p>
 
-        <?php if( $this->opts['use_default'] != 1 ) : ?>
+        <?php if( 1 !== $this->opts['use_default'] ) : ?>
         <p>
             <label for="<?php echo $this->get_field_id( 'custom_code' ); ?>"><?php _e( 'Code' ); ?></label>
             <textarea rows="10" class="widefat" id="<?php echo $this->get_field_id( 'custom_code' ); ?>" name="<?php echo $this->get_field_name( 'custom_code' ); ?>"><?php echo wp_kses_post( $custom_code ); ?></textarea>
@@ -162,7 +162,7 @@ class TAW_Widget extends WP_Widget {
                 $response_code = wp_remote_retrieve_response_code( $response );
                 $response_mess = wp_remote_retrieve_response_message( $response );
 
-                if( $response_code == 200 ){
+                if( 200 === $response_code ){
                     $data = json_decode( wp_remote_retrieve_body( $response ), true );
                 } else {
                     $this->delete_cache($apikey, $apilogin, $apisecret);
