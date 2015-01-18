@@ -107,7 +107,7 @@ class TAW_Widget extends WP_Widget {
             <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
         </p>
 
-        <?php if( 1 !== $this->opts['use_default'] ) : ?>
+        <?php if( 1 != $this->opts['use_default'] ) : ?>
         <p>
             <label for="<?php echo $this->get_field_id( 'custom_code' ); ?>"><?php _e( 'Code' ); ?></label>
             <textarea rows="10" class="widefat" id="<?php echo $this->get_field_id( 'custom_code' ); ?>" name="<?php echo $this->get_field_name( 'custom_code' ); ?>"><?php echo wp_kses_post( $custom_code ); ?></textarea>
