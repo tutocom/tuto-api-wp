@@ -8,7 +8,7 @@ class TAW_Widget extends WP_Widget {
 
     const API_HOST = 'https://api.tuto.com';
     const API_VERSION = '0.2';
-    const API_ENDPOINT = 'contributor/statistics/common';
+    const DEFAULT_API_ENDPOINT = '/contributor/statistics/common';
 
     /**
      * @var
@@ -59,7 +59,7 @@ class TAW_Widget extends WP_Widget {
      */
     public function add_dashboard_widget_content(){
 
-        echo $this->display_stats(1);
+        echo $this->display_stats(false, 1);
 
     }
 
@@ -88,7 +88,7 @@ class TAW_Widget extends WP_Widget {
 
         }
 
-        echo $this->display_stats($this->opts['use_default'], $instance['custom_code']);
+        echo $this->display_stats(false, $this->opts['use_default'], $instance['custom_code']);
 
         echo $args['after_widget'];
     }
@@ -97,6 +97,7 @@ class TAW_Widget extends WP_Widget {
      * Back-end widget form.
      * @see WP_Widget::form()
      * @param array $instance Previously saved values from database.
+     * @return void
      */
     public function form( $instance ) {
         $title = ! empty( $instance['title'] ) ? $instance['title'] : '';
@@ -107,7 +108,7 @@ class TAW_Widget extends WP_Widget {
             <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
         </p>
 
-        <?php if( 1 != $this->opts['use_default'] ) : ?>
+        <?php if( 1 !== (int) $this->opts['use_default'] ) : ?>
         <p>
             <label for="<?php echo $this->get_field_id( 'custom_code' ); ?>"><?php _e( 'Code' ); ?></label>
             <textarea rows="10" class="widefat" id="<?php echo $this->get_field_id( 'custom_code' ); ?>" name="<?php echo $this->get_field_name( 'custom_code' ); ?>"><?php echo wp_kses_post( $custom_code ); ?></textarea>
@@ -136,66 +137,95 @@ class TAW_Widget extends WP_Widget {
     }
 
     /**
+     * Build query
+     * @param bool $endpoint
+     * @return bool|string
+     */
+    public function build_request($endpoint = false){
+
+        $suffix = $endpoint === false ?  self::DEFAULT_API_ENDPOINT : $endpoint;
+        return esc_url(self::API_HOST . '/' . self::API_VERSION . $suffix);
+    }
+
+    /**
+     * API Call
+     * @param $endpoint
      * @param $apikey
      * @param $apilogin
      * @param $apisecret
      * @return array|mixed|string
      */
-    protected function get_stats($apikey, $apilogin, $apisecret ){
+    public function send_request($endpoint = false, $apikey, $apilogin, $apisecret){
 
-        // quick cache WP
-        $data = get_site_transient( md5($apikey . $apilogin . $apisecret) );
+        $args = array(
+            'headers' => array(
+                'X-API-KEY' => $apikey,
+                'Authorization' => 'Basic ' . base64_encode($apilogin . ':' . $apisecret),// thanks remiheens for making this endpoint available with Basic :)
+            )
+        );
 
-        if( false === $data ) {
+        try {
 
-            $url  = self::API_HOST . '/' . self::API_VERSION . '/' . self:: API_ENDPOINT;
-            $args = array(
-                'headers' => array(
-                    'X-API-KEY' => $apikey,
-                    'Authorization' => 'Basic ' .  base64_encode($apilogin .':'.$apisecret ),// thanks remiheens for making this endpoint available with Basic :)
-                    )
-            );
+            $response = wp_remote_get( $this->build_request($endpoint), $args );
+            $response_code = wp_remote_retrieve_response_code( $response );
+            $response_mess = wp_remote_retrieve_response_message( $response );
 
-            try {
-
-                $response = wp_remote_get( $url, $args );
-                $response_code = wp_remote_retrieve_response_code( $response );
-                $response_mess = wp_remote_retrieve_response_message( $response );
-
-                if( 200 === $response_code ){
-                    $data = json_decode( wp_remote_retrieve_body( $response ), true );
-                } else {
-                    $this->delete_cache($apikey, $apilogin, $apisecret);
-                    $data  =  __('The API returns this message (only users with right permissions can see this message) :', TAW_TEXTDOMAIN ) ."\n";
-                    $data .= '<strong>' . $response_code . ' : ' . $response_mess . '</strong>';
-                    return current_user_can( 'manage_options' ) ? $data : '';
-                }
-
-            } catch (Exception $e) {
-                $this->delete_cache($apikey, $apilogin, $apisecret);
+            if( 200 === $response_code ){
+                $data = json_decode( wp_remote_retrieve_body( $response ), true );
+            } else {
+                $this->delete_cache($endpoint, $apikey, $apilogin, $apisecret);
                 $data  =  __('The API returns this message (only users with right permissions can see this message) :', TAW_TEXTDOMAIN ) ."\n";
-                $data .= '<strong>' . $e->getMessage() . '</strong>';
+                $data .= '<strong>' . $response_code . ' : ' . $response_mess . '</strong>';
                 return current_user_can( 'manage_options' ) ? $data : '';
             }
 
-            set_site_transient( md5($apikey . $apilogin . $apisecret), $data, DAY_IN_SECONDS );// seems enough, ~ 1 refresh per day
+        } catch (Exception $e) {
+            $this->delete_cache($endpoint, $apikey, $apilogin, $apisecret);
+            $data  =  __('The API returns this message (only users with right permissions can see this message) :', TAW_TEXTDOMAIN ) ."\n";
+            $data .= '<strong>' . $e->getMessage() . '</strong>';
+            return current_user_can( 'manage_options' ) ? $data : '';
         }
 
         return $data;
     }
 
     /**
+     * Get statistics and put them in cache
+     * @param bool $endpoint
+     * @param $apikey
+     * @param $apilogin
+     * @param $apisecret
+     * @return mixed
+     */
+    protected function get_stats($endpoint = false, $apikey, $apilogin, $apisecret ){
+
+        // quick cache WP
+        $cached_data = get_site_transient( md5($endpoint . $apikey . $apilogin . $apisecret) );
+
+        if( false === $cached_data ) {
+
+            $cached_data = $this->send_request($endpoint, $apikey, $apilogin, $apisecret);
+
+            set_site_transient( md5($endpoint . $apikey . $apilogin . $apisecret), $cached_data, DAY_IN_SECONDS );// seems enough, ~ 1 refresh per day
+        }
+
+        return $cached_data;
+    }
+
+    /**
+     * Output statistics
+     * @param bool $endpoint
      * @param bool $use_default
      * @param bool $custom_code
      * @return array|mixed|string
      */
-    public function display_stats($use_default = false, $custom_code = false){
+    public function display_stats($endpoint = false, $use_default = false, $custom_code = false){
 
-        $data = $this->get_stats($this->opts['apikey'], $this->opts['apilogin'], $this->opts['apisecret']);
+        $common = $this->get_stats($endpoint, $this->opts['apikey'], $this->opts['apilogin'], $this->opts['apisecret']);
 
-        if ( is_array($data) ){
+        if ( is_array($common) ){
 
-            $stat = reset($data);
+            $stat = reset($common);
             $apilogin = $this->opts['apilogin'];
 
             $output = '';
@@ -205,17 +235,19 @@ class TAW_Widget extends WP_Widget {
             return $output;
         }
 
-        return $data;
+        return $common;
     }
 
     /**
+     * Empty cache
+     * @param bool $endpoint
      * @param $apikey
      * @param $apilogin
      * @param $apisecret
      */
-    protected function delete_cache($apikey, $apilogin, $apisecret){
+    protected function delete_cache($endpoint = false, $apikey, $apilogin, $apisecret){
 
-        delete_site_transient( md5($apikey . $apilogin . $apisecret) );
+        delete_site_transient( md5($endpoint . $apikey . $apilogin . $apisecret) );
 
     }
 

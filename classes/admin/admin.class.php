@@ -38,6 +38,7 @@ if( ! class_exists('TAW_Admin') ) {
          */
         public function admin_page(){
             $opts = self::get_options();
+            $data = get_site_transient( md5($opts['apikey'] . $opts['apilogin'] . $opts['apisecret']) );
             require(TAW_DIR . 'views/admin/settings.php');
         }
 

@@ -1,7 +1,8 @@
 <?php
 defined('ABSPATH') or die('No direct load !');
 
-if($use_default == 1) {
+
+if( 1 === (int) $use_default) {
     //default output
     $output  = '<div class="taw-container">';
     $output .= '<div class="taw taw-tutorials"><span class="big-number-statistics">' . $stat['tutorials'] . '</span> <span class="sentence-under-number-statistics">'  . __( 'tutorials', TAW_TEXTDOMAIN ) . '</span></div>';
