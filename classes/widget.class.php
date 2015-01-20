@@ -131,7 +131,7 @@ class TAW_Widget extends WP_Widget {
         $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
         $instance['custom_code'] = ( ! empty( $new_instance['custom_code'] ) ) ? wp_kses_post(  $new_instance['custom_code'] ) : '';
 
-        $this->delete_cache($this->opts['apikey'], $this->opts['apilogin'], $this->opts['apisecret']);
+        $this->delete_cache(false, $this->opts['apikey'], $this->opts['apilogin'], $this->opts['apisecret']);
 
         return $instance;
     }
