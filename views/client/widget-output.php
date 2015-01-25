@@ -18,4 +18,5 @@ if( 1 === (int) $use_default) {
     $output = str_replace('%SALES_COUNT%', $stat['sales'], $output);
     $output = str_replace('%AVERAGE_RATING%', round($stat['rating'], 1), $output);
     $output = str_replace('%TUTORIALS_COUNT%', $stat['tutorials'], $output);
+    $output = str_replace('%PROFILE_LINK%', $info['profile'], $output);
 }
