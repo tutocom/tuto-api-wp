@@ -222,11 +222,12 @@ class TAW_Widget extends WP_Widget {
     public function display_stats($endpoint = false, $use_default = false, $custom_code = false){
 
         $common = $this->get_stats($endpoint, $this->opts['apikey'], $this->opts['apilogin'], $this->opts['apisecret']);
+        $profile = $this->get_stats('/contributor/infos', $this->opts['apikey'], $this->opts['apilogin'], $this->opts['apisecret']);
 
-        if ( is_array($common) ){
+        if ( is_array($common) && is_array($profile) ){
 
-            $stat = reset($common);
-            $apilogin = $this->opts['apilogin'];
+            $stat  = reset($common);
+            $info  = reset($profile);
 
             $output = '';
 

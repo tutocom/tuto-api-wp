@@ -32,6 +32,6 @@ defined('ABSPATH') or die('No direct load !');
             <?php submit_button(null, 'primary', '_submit'); ?>
         </fieldset>
         <p><?php _e( 'You can choose which statistics you want to show. By default all statistics will be displayed by the widget Tuto.com but you can easily change it. Just select "no" for the option "Use default widget" and use the following special markers :', TAW_TEXTDOMAIN ); ?></p>
-        <p><strong>%CUSTOMERS_COUNT%, %SALES_COUNT%,%TUTORIALS_COUNT%,%AVERAGE_RATING%</strong></p>
+        <p><strong>%CUSTOMERS_COUNT%, %SALES_COUNT%, %TUTORIALS_COUNT%, %AVERAGE_RATING%, %AVATAR%</strong></p>
     </form>
 </div>
