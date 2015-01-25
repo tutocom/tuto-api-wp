@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Plugin WP basé sur la libairie PHP utilisée pour la derniere version de l'[API Tuto.com](https://api.tuto.com/docs).
+Plugin WP pour la derniere version de l'[API Tuto.com](https://api.tuto.com/docs).
 Pour le moment, l'API Tuto.com est uniquement disponible pour les auteurs.
 
 ## Pré-requis
